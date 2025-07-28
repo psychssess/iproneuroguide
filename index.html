@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ipro NeuroGuide</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- 🔵 App Header -->
+  <header>
+ <img src="logo.png" alt="Ipro NeuroGuide Logo" id="appLogo" />
+  <h1>Ipro NeuroGuide</h1>
+  <p>Your Clinical Decision Companion</p>
+  </header>
+
+  <!-- 🧭 Base Navigation Buttons -->
+  <nav id="main-nav">
+    <button class="btn" onclick="showSection('clinician-info')">Clinician Onboarding</button>
+    <button class="btn" onclick="showSection('assessment-menu')">Start Assessment</button>
+    <button class="btn" onclick="showSection('treatment-guide')">Treatment Planning</button>
+    <button class="btn" onclick="showSection('about-app')">About the App</button>
+    <button class="btn" onclick="showSection('about-developer')">About the Developer</button>
+  </nav>
+
+  <!-- 👨‍⚕️ Clinician Onboarding -->
+  <section id="clinician-info" style="display:none;">
+    <h2>Welcome Clinician</h2>
+    <form id="clinicianForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required />
+      <label for="role">Role:</label>
+      <input type="text" id="role" name="role" required />
+      <button type="submit" class="btn">Continue</button>
+    </form>
+    <div id="greeting" style="display:none;">
+      <h3 id="clinicianGreeting"></h3>
+    </div>
+  </section>
+
+  <!-- 🔍 Assessment Menu -->
+  <section id="assessment-menu" style="display:none;">
+    <h2>Select Assessment</h2>
+    <button class="btn" onclick="showSection('phq9-assessment')">PHQ-9: Depression</button>
+    <button class="btn" onclick="showSection('gad7-assessment')">GAD-7: Anxiety</button>
+    <button class="btn" onclick="showSection('pcl5-assessment')">PCL-5: PTSD</button>
+    <!-- More modules can be added here -->
+  </section>
+
+  <!-- 📊 PHQ-9 Assessment -->
+  <section id="phq9-assessment" style="display:none;">
+    <h2>PHQ-9: Depression Checklist</h2>
+    <form id="phq9">
+      <label>1. Little interest or pleasure in doing things:</label>
+<select name="q1">
+  <option value="0">Never</option>
+  <option value="1">Occasionally</option>
+  <option value="2">Sometimes</option>
+  <option value="3">Always</option>
+</select>
+
+<label>2. Feeling down, depressed, or hopeless:</label>
+<select name="q2"> <option value="0">Never</option>
+  <option value="1">Occasionally</option>
+  <option value="2">Sometimes</option>
+  <option value="3">Always</option></select>
+
+<label>3. Trouble falling or staying asleep, or sleeping too much:</label>
+<select name="q3"> <option value="0">Never</option>
+  <option value="1">Occasionally</option>
+  <option value="2">Sometimes</option>
+  <option value="3">Always</option></select>
+
+<label>4. Feeling tired or having little energy:</label>
+<select name="q4"> <option value="0">Never</option>
+  <option value="1">Occasionally</option>
+  <option value="2">Sometimes</option>
+  <option value="3">Always</option></select>
+
+<label>5. Poor appetite or overeating:</label>
+<select name="q5"> <option value="0">Never</option>
+  <option value="1">Occasionally</option>
+  <option value="2">Sometimes</option>
+  <option value="3">Always</option></select>
+
+<label>6. Feeling bad about yourself—or that you are a failure:</label>
+<select name="q6"> <option value="0">Never</option>
+  <option value="1">Occasionally</option>
+  <option value="2">Sometimes</option>
+  <option value="3">Always</option></select>
+
+<label>7. Trouble concentrating on things:</label>
+<select name="q7"> <option value="0">Never</option>
+  <option value="1">Occasionally</option>
+  <option value="2">Sometimes</option>
+  <option value="3">Always</option></select>
+
+<label>8. Moving or speaking so slowly that others notice—or being fidgety:</label>
+<select name="q8"> <option value="0">Never</option>
+  <option value="1">Occasionally</option>
+  <option value="2">Sometimes</option>
+  <option value="3">Always</option></select>
+
+<label>9. Thoughts that you would be better off dead or hurting yourself:</label>
+<select name="q9"> <option value="0">Never</option>
+  <option value="1">Occasionally</option>
+  <option value="2">Sometimes</option>
+  <option value="3">Always</option></select>
+
+<!-- Keep your submit button -->
+<button type="button" class="btn" onclick="scorePHQ()">Submit Diagnosis</button>
+    </form>
+    <p id="diagnosis-result"></p>
+  </section>
+
+  <!-- 😟 GAD-7 Assessment -->
+  <section id="gad7-assessment" style="display:none;">
+    <h2>GAD-7: Anxiety Checklist</h2>
+    <!-- GAD-7 items -->
+    <p><form id="gad7">
+  <label>1. Feeling nervous, anxious, or on edge:</label>
+  <select name="q1">
+    <option value="0">Not at all</option>
+    <option value="1">Several days</option>
+    <option value="2">More than half the days</option>
+    <option value="3">Nearly every day</option>
+  </select>
+
+  <label>2. Not being able to stop or control worrying:</label>
+  <select name="q2"><option value="0">Not at all</option>
+    <option value="1">Several days</option>
+    <option value="2">More than half the days</option>
+    <option value="3">Nearly every day</option></select>
+
+  <label>3. Worrying too much about different things:</label>
+  <select name="q3"><option value="0">Not at all</option>
+    <option value="1">Several days</option>
+    <option value="2">More than half the days</option>
+    <option value="3">Nearly every day</option></select>
+
+  <label>4. Trouble relaxing:</label>
+  <select name="q4"><option value="0">Not at all</option>
+    <option value="1">Several days</option>
+    <option value="2">More than half the days</option>
+    <option value="3">Nearly every day</option></select>
+
+  <label>5. Being so restless that it's hard to sit still:</label>
+  <select name="q5"><option value="0">Not at all</option>
+    <option value="1">Several days</option>
+    <option value="2">More than half the days</option>
+    <option value="3">Nearly every day</option></select>
+
+  <label>6. Becoming easily annoyed or irritable:</label>
+  <select name="q6"><option value="0">Not at all</option>
+    <option value="1">Several days</option>
+    <option value="2">More than half the days</option>
+    <option value="3">Nearly every day</option></select>
+
+  <label>7. Feeling afraid as if something awful might happen:</label>
+  <select name="q7"><option value="0">Not at all</option>
+    <option value="1">Several days</option>
+    <option value="2">More than half the days</option>
+    <option value="3">Nearly every day</option></select>
+
+  <button type="button" class="btn" onclick="scoreGAD()">Submit Diagnosis</button>
+</form>
+<p id="gad-result"></p></p>
+  </section>
+
+  <!-- 😱 PCL-5 Assessment -->
+  <section id="pcl5-assessment" style="display:none;">
+    <h2>PCL-5: PTSD Screening</h2>
+    <!-- PCL-5 items -->
+    <p><form id="pcl5">
+  <p>Instructions: Please rate how much you’ve been bothered by each problem in the past month.</p>
+
+  <label>1. Repeated, disturbing, and unwanted memories of the stressful experience:</label>
+  <select name="q1">
+    <option value="0">Never</option>
+    <option value="1">Occationally</option>
+    <option value="2">Sometimes</option>
+    <option value="3">Often</option>
+    <option value="4">Always</option>
+  </select>
+
+  <label>2. Feeling very upset when something reminded you of the stressful experience:</label>
+  <select name="q2"><option value="0">Never</option>
+    <option value="1">Occationally</option>
+    <option value="2">Sometimes</option>
+    <option value="3">Often</option>
+    <option value="4">Always</option></select>
+
+  <label>3. Avoiding external reminders of the experience (people, places, conversations):</label>
+  <select name="q3"><option value="0">Never</option>
+    <option value="1">Occationally</option>
+    <option value="2">Sometimes</option>
+    <option value="3">Often</option>
+    <option value="4">Always</option></select>
+
+  <label>4. Trouble remembering important parts of the stressful experience:</label>
+  <select name="q4"><option value="0">Never</option>
+    <option value="1">Occationally</option>
+    <option value="2">Sometimes</option>
+    <option value="3">Often</option>
+    <option value="4">Always</option></select>
+
+  <label>5. Feeling distant or cut off from other people:</label>
+  <select name="q5"><option value="0">Never</option>
+    <option value="1">Occationally</option>
+    <option value="2">Sometimes</option>
+    <option value="3">Often</option>
+    <option value="4">Always</option></select>
+
+  <label>6. Blaming yourself or others for the cause/consequences of the trauma:</label>
+  <select name="q6"><option value="0">Never</option>
+    <option value="1">Occationally</option>
+    <option value="2">Sometimes</option>
+    <option value="3">Often</option>
+    <option value="4">Always</option></select>
+
+  <label>7. Being “super alert” or watchful and on guard:</label>
+  <select name="q7"><option value="0">Never</option>
+    <option value="1">Occationally</option>
+    <option value="2">Sometimes</option>
+    <option value="3">Often</option>
+    <option value="4">Always</option></select>
+
+  <label>8. Trouble concentrating:</label>
+  <select name="q8"><option value="0">Never</option>
+    <option value="1">Occationally</option>
+    <option value="2">Sometimes</option>
+    <option value="3">Often</option>
+    <option value="4">Always</option></select>
+
+  <label>9. Irritable behavior, angry outbursts, or acting aggressively:</label>
+  <select name="q9"><option value="0">Never</option>
+    <option value="1">Occationally</option>
+    <option value="2">Sometimes</option>
+    <option value="3">Often</option>
+    <option value="4">Always</option></select>
+
+  <label>10. Difficulty experiencing positive emotions:</label>
+  <select name="q10"><option value="0">Never</option>
+    <option value="1">Occationally</option>
+    <option value="2">Sometimes</option>
+    <option value="3">Often</option>
+    <option value="4">Always</option></select>
+
+  <button type="button" class="btn" onclick="scorePCL()">Submit Diagnosis</button>
+</form>
+<p id="pcl-result"></p></p>
+  </section>
+
+  <!-- 💼 Treatment Planning -->
+  <section id="treatment-guide" style="display:none;">
+    <h2>Treatment Recommendations</h2>
+    <div id="treatment-output">
+      <p>[Treatment recommendations will appear here]</p>
+    </div>
+  </section>
+
+  <!-- 📖 About the App -->
+  <section id="about-app" style="display:none;">
+    <h2>About Ipro NeuroGuide</h2>
+    <p>
+      <strong>Ipro NeuroGuide</strong> is a clinician-first platform designed to assist mental health professionals with structured assessments, evidence-based treatment planning, and personalized guidance across diverse care settings.
+    </p>
+  </section>
+
+  <!-- 🧑‍🏫 About the Developer -->
+  <section id="about-developer" style="display:none;">
+    <h2>About the Developer</h2>
+    <p>
+      <strong>Associate Professor Enoch Tomiwo Oladunmoye</strong> serves in the Department of Applied Psychology and the Department of Humanities and Social Sciences (CHSS) at <em>Kampala International University (KIU), Uganda</em>. He specializes in bridging psychological theory and digital innovation to enhance clinical impact.
+    </p>
+    <section id="client-profile" style="display:none;">
+  <h2>Client Profile</h2>
+  <form id="clientForm">
+    <label for="profileName">Full Name:</label>
+    <input type="text" id="profileName" required />
+
+    <label for="profileAge">Age:</label>
+    <input type="number" id="profileAge" required />
+
+    <label for="profileGender">Gender:</label>
+    <select id="profileGender">
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+      <option value="Other">Other</option>
+    </select>
+
+    <label for="profileNotes">Presenting Problem:</label>
+    <textarea id="profileNotes" rows="3"></textarea>
+
+    <button class="btn" type="submit">Save Profile</button>
+  </form>
+
+  <h3>Saved Clients</h3>
+  <ul id="clientList"></ul>
+</section>
+    <button class="btn" onclick="showSection('client-profile')">Client Profiles</button>
+    
+  </section>
+<section id="session-log" style="display:none;">
+  <h2>Session Notes</h2>
+  <form id="logForm">
+    <label for="linkedClient">Select Client:</label>
+<select id="linkedClient" name="linkedClient" required></select>
+
+    <label for="sessionDate">Session Date:</label>
+    <input type="date" id="sessionDate" name="sessionDate" required />
+
+    <label for="assessmentType">Assessment Used:</label>
+    <select id="assessmentType" name="assessmentType">
+      <option value="PHQ-9">PHQ-9</option>
+      <option value="GAD-7">GAD-7</option>
+      <option value="PCL-5">PCL-5</option>
+    </select>
+
+    <label for="notes">Session Summary:</label>
+    <textarea id="notes" name="notes" rows="4" required></textarea>
+
+    <button type="submit" class="btn">Save Log</button>
+  </form>
+
+  <h3>Previous Logs</h3>
+  <label for="filterName">Filter by Client Name:</label>
+<input type="text" id="filterName" placeholder="Enter name..." />
+
+<label for="filterAssessment">Filter by Assessment Type:</label>
+<select id="filterAssessment">
+  <option value="">-- All --</option>
+  <option value="PHQ-9">PHQ-9</option>
+  <option value="GAD-7">GAD-7</option>
+  <option value="PCL-5">PCL-5</option>
+</select>
+
+<button class="btn" onclick="displayLogs()">Apply Filters</button>
+  <ul id="logList"></ul>
+</section>
+<button class="btn" onclick="showSection('session-log')">Session Logs</button>
+<button class="btn" onclick="showSection('client-profile')">Client Profiles</button>
+
+
+
+<button class="btn" onclick="exportLogs()">Export Logs</button>
+
+
+<button class="btn" onclick="triggerImport()">Import Logs</button>
+<input type="file" id="importFile" accept=".json" style="display:none;" />
+
+<section id="session-log" style="display:none;">...</section>
+<section id="treatment-guide" style="display:none;">...</section>
+
+
+<section id="symptom-analytics" style="display:none;">
+  <h2>Symptom Tracking</h2>
+
+  <button class="btn" onclick="toggleChartControls()">Show Chart Controls</button>
+
+  <div id="chart-controls" style="display:none; margin-top:10px;">
+    <label for="chartClient">Select Client:</label>
+    <select id="chartClient"></select>
+
+    <label for="chartAssessment">Select Assessment:</label>
+    <select id="chartAssessment">
+      <option value="PHQ-9">PHQ-9</option>
+      <option value="GAD-7">GAD-7</option>
+      <option value="PCL-5">PCL-5</option>
+    </select>
+
+    <button class="btn" onclick="renderSymptomChart()">Generate Chart</button>
+  </div>
+
+  <canvas id="symptomChart" width="600" height="400"></canvas>
+</section>
+<button class="btn" onclick="showSection('symptom-analytics')">Symptom Analytics</button>
+
+
+  <!-- 🔗 JavaScript Logic -->
+  <script src="script.js"></script>
+</body>
+</html>
