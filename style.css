@@ -106,6 +106,34 @@ input, select {
   background-color: #999;
   cursor: not-allowed;
 }
+.button-column {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch; /* Buttons fill available width */
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.action-btn {
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  background-color: #007acc;
+  color: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .button-column {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .action-btn {
+    width: auto;
+  }
+}
 
 /* ------------------------------
    Responsive Styling
